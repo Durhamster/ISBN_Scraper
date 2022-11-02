@@ -18,6 +18,9 @@ pipenv = "==2022.10.25"
 platformdirs = "==2.5.2"
 virtualenv = "==20.16.6"
 virtualenv-clone = "==0.5.7"
+commonmark = "==0.9.1"
+pygments = "==2.13.0"
+rich = "==12.6.0"
 
 [dev-packages]
 
