@@ -91,26 +91,29 @@ if __name__ == "__main__":
 
         task = progress.add_task("[green]Fetching...[/green]", total=len(books))
         for book in books:
-            title, authors, public_domain, page_count, language, summary = get_book(
-                book
-            )
-            book_dict = dict(
-                {
-                    "Title": title,
-                    "Authors": authors,
-                    "ISBN": book,
-                    "Public Domain": public_domain,
-                    "Page Count": page_count,
-                    "Language": language,
-                    "Summary": summary,
-                }
-            )
-            book_df = pd.DataFrame(book_dict, index=[0])
-            final_book_df = pd.concat([final_book_df, book_df], ignore_index=True)
-            progress.update(task, advance=1)
+            if book == "":
+                pass
+            else:
+                title, authors, public_domain, page_count, language, summary = get_book(
+                    book
+                )
+                book_dict = dict(
+                    {
+                        "Title": title,
+                        "Authors": authors,
+                        "ISBN": book,
+                        "Public Domain": public_domain,
+                        "Page Count": page_count,
+                        "Language": language,
+                        "Summary": summary,
+                    }
+                )
+                book_df = pd.DataFrame(book_dict, index=[0])
+                final_book_df = pd.concat([final_book_df, book_df], ignore_index=True)
+                progress.update(task, advance=1)
 
-            # Pause to prevent too many HTTP Requests
-            sleep(5)
+                # Pause to prevent too many HTTP Requests
+                sleep(5)
 
     # Generates CSV file for final df
     final_book_df.reset_index()
